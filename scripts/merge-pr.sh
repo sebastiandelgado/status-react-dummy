@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 set -eof pipefail
 
 trap cleanup EXIT
