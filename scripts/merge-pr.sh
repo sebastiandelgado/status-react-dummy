@@ -80,12 +80,8 @@ rebase_pr() {
 }
 
 check_is_pr_single_commit() {
-  echo "HERE"
-  echo $BRANCH
-  echo $PR_LOCAL_BRACNCH
-  git rev-list $BRANCH..$PR_LOCAL_BRACNCH
-  if [[ $(git rev-list $BRANCH..$PR_LOCAL_BRACNCH | wc -l) -ne 1 ]] ;then
-    fatal "Only squashed/single-commit PRs can be merged"
+  if [[ $(git rev-list $BRANCH..$PR_LOCAL_BRANCH | wc -l) -ne 1 ]] ;then
+    confirm "PR has multiple commits, continue merging without squashing them?"
   fi
 }
 
@@ -148,3 +144,4 @@ EOF
 }
 
 run "$@"
+
