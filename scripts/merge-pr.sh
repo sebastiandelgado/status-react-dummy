@@ -22,8 +22,8 @@ confirm() {
 
 load_config() {
   [[ -f merge-pr.conf ]] && . merge-pr.conf
-  : ${OWNER:=status-im}
-  : ${REPO:=status-react}
+  : ${OWNER:=sebastiandelgado}
+  : ${REPO:=status-react-dummy}
   : ${REMOTE:=origin}
   : ${BRANCH:=develop}
 }
