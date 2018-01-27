@@ -55,7 +55,8 @@ get_pr_info() {
   fi
   local maintainer_can_modify=
   if [[ $(echo "$pr_info" | jq -r .maintainer_can_modify) == true ]]; then
-  	# [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||
+ 
+ 	# [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||
   	# [[ $(echo "$pr_info" | jq -r .author_association) ==  OWNER]]; then
     RW_PR_REPO=1
   else
