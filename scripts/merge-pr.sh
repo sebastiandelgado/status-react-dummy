@@ -54,10 +54,9 @@ get_pr_info() {
     fatal "PR $pr is closed, will not merge"
   fi
   local maintainer_can_modify=
-  if [[ $(echo "$pr_info" | jq -r .maintainer_can_modify) == true ]]; then
- 
- 	# [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||
-  	# [[ $(echo "$pr_info" | jq -r .author_association) ==  OWNER]]; then
+  if [[ $(echo "$pr_info" | jq -r .maintainer_can_modify) == true ]] ||
+     [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||
+     [[ $(echo "$pr_info" | jq -r .author_association) ==  OWNER]]; then
     RW_PR_REPO=1
   else
     warn "PR does not allow 'edits from maintainers', so it will be kept open"
