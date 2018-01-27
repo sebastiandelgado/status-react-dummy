@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 set -eof pipefail
 
 trap cleanup EXIT
@@ -24,8 +22,8 @@ confirm() {
 
 load_config() {
   [[ -f merge-pr.conf ]] && . merge-pr.conf
-  : ${OWNER:=sebastiandelgado}
-  : ${REPO:=status-react-dummy}
+  : ${OWNER:=status-im}
+  : ${REPO:=status-react}
   : ${REMOTE:=origin}
   : ${BRANCH:=develop}
 }
@@ -55,8 +53,11 @@ get_pr_info() {
   if [[ $(echo "$pr_info" | jq -r .state) == closed ]]; then
     fatal "PR $pr is closed, will not merge"
   fi
+  local maintainer_can_modify=
   if [[ $(echo "$pr_info" | jq -r .maintainer_can_modify) == true ]]; then
-    RW_PR_REPO=0
+  	# [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||
+  	# [[ $(echo "$pr_info" | jq -r .author_association) ==  OWNER]]; then
+    RW_PR_REPO=1
   else
     warn "PR does not allow 'edits from maintainers', so it will be kept open"
   fi
@@ -146,4 +147,3 @@ EOF
 }
 
 run "$@"
-
