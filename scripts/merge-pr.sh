@@ -53,8 +53,8 @@ get_pr_info() {
   if [[ $(echo "$pr_info" | jq -r .state) == closed ]]; then
     fatal "PR $pr is closed, will not merge"
   fi
-  if [[ $(echo "$pr_info" | jq -r .maintainer_can_modify) == true ]] ||
-     [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||
+  if [[ $(echo "$pr_info" | jq -r .maintainer_can_modify) == true ]] ||\
+     [[ $(echo "$pr_info" | jq -r .author_association) ==  MEMBER]] ||\
      [[ $(echo "$pr_info" | jq -r .author_association) ==  OWNER]]; then
     RW_PR_REPO=1
   else
